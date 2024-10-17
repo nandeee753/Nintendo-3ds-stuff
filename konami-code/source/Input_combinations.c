@@ -5,13 +5,14 @@
 #include <3ds.h>
 
 #include "./input_combinations.h"
+#include "./input_combinations.inc"
 
 static InputCombination *inputCombinations[MAX_INPUT_COMBINATIONS];
 static unsigned char inputCombinationsLength = 0;
 
 InputCombination *createInputCombination(const char name[], const u32 keyInputs[], const unsigned char inputsLength, const void (*fn)()) {
   InputCombination *inputCombination = malloc(sizeof(InputCombination));
-  // maybe add asserts to avoid putting strings too long
+  // TODO : add asserts to avoid putting strings too long
   strcpy(inputCombination->name, name);
   memcpy(inputCombination->keyInputs, keyInputs, inputsLength * sizeof(u32));
   inputCombination->length = inputsLength;
