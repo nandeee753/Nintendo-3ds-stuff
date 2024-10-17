@@ -3,10 +3,14 @@
 #include <string.h>
 #include <3ds.h>
 
-#include "imcc.h"
+#include "input_combinations.h"
 
 const u32 KONAMI_CODE[] = {KEY_DUP, KEY_DUP, KEY_DDOWN, KEY_DDOWN, KEY_DLEFT, KEY_DRIGHT, KEY_DLEFT, KEY_DRIGHT, KEY_B, KEY_A, KEY_SELECT};
 const unsigned char KONAMI_CODE_LENGTH = sizeof(KONAMI_CODE) / sizeof(KONAMI_CODE[0]);
+
+void fn(void) {
+  printf("Hello World!\n");
+}
 
 const char keysNames[32][32] = {
     "KEY_A", "KEY_B", "KEY_SELECT", "KEY_START",
@@ -25,7 +29,7 @@ int main()
   gfxInitDefault();
   consoleInit(GFX_TOP, NULL);
 
-  createCheatCode("konami code", KONAMI_CODE, KONAMI_CODE_LENGTH);
+  createInputCombination("konami code", KONAMI_CODE, KONAMI_CODE_LENGTH, &fn);
 
   u32 kDownOld = 0;
   u32 kHeldOld = 0;
@@ -41,7 +45,7 @@ int main()
 
     if (kDown != kDownOld || kHeld != kHeldOld || kUp != kUpOld)
     {
-      checkCheatCodes(&kDown);
+      checkForInputCombinations(&kDown);
 
       if (kDown == KEY_START) { break; }
 
