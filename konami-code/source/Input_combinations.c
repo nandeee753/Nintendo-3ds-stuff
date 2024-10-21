@@ -12,7 +12,7 @@ static unsigned char inputCombinationsLength = 0;
 
 InputCombination *createInputCombination(const char name[], const u32 keyInputs[], const unsigned char inputsLength, const void (*fn)()) {
   InputCombination *inputCombination = malloc(sizeof(InputCombination));
-  // TODO : add asserts to avoid putting strings too long
+  assert(strlen(name) <= MAX_INPUT_COMBINATION_NAME_LENGTH)// TODO : add asserts to avoid putting strings too long
   strcpy(inputCombination->name, name);
   memcpy(inputCombination->keyInputs, keyInputs, inputsLength * sizeof(u32));
   inputCombination->length = inputsLength;
